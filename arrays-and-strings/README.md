@@ -14,3 +14,6 @@
       the same.
     * If you sort and compare the strings then you get `O(n log n)` time. If
       you use a hash table then you'll take up some space but you get `O(n)`.
+
+3. **Sum of pairs** Find a pair of numbers in an array that add up to a 
+   given sum.
