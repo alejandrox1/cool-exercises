@@ -21,9 +21,6 @@ func GetLinkedList() *DoublyLinkedList {
 // GetLinkedListFromValues serves as constructor of a doubly linked list.
 func GetLinkedListFromValues(vals []int) *DoublyLinkedList {
 	ll := GetLinkedList()
-	if len(vals) == 0 {
-		return ll
-	}
 
 	for _, val := range vals {
 		ll.Insert(val)
@@ -50,12 +47,52 @@ func (ll *DoublyLinkedList) insertNode(newNode *node) {
 	}
 }
 
+// Get returns thevalue at a given position within the list.
+func (ll *DoublyLinkedList) Get(index int) int {
+	return ll.getNode(index).value
+}
+
 func (ll *DoublyLinkedList) getNode(index int) *node {
 	node := ll.head
 	for i := 0; i < index; i++ {
 		node = node.next
 	}
+
 	return node
+}
+
+// Remove removes a node give its index.
+func (ll *DoublyLinkedList) Remove(index int) {
+	ll.removeNode(ll.getNode(index))
+}
+
+func (ll *DoublyLinkedList) removeNode(node *node) {
+	if ll.head == nil || ll.tail == nil {
+		return
+	}
+
+	if ll.head == node {
+		ll.head = node.next
+	}
+
+	if ll.tail == node {
+		ll.tail = node.prev
+	}
+
+	if node.prev != nil {
+		node.prev.next = node.next
+	}
+
+	if node.next != nil {
+		node.next.prev = node.prev
+	}
+
+	ll.count--
+}
+
+// Len returns the total number of nodes in the list.
+func (ll *DoublyLinkedList) Len() int {
+	return ll.count
 }
 
 // Slice returns a slice of all integer values in the linked list.
@@ -69,14 +106,4 @@ func (ll *DoublyLinkedList) Slice() []int {
 	}
 
 	return slice
-}
-
-// Get returns thevalue at a given position within the list.
-func (ll *DoublyLinkedList) Get(index int) int {
-	return ll.getNode(index).value
-}
-
-// Len returns the total number of nodes in the list.
-func (ll *DoublyLinkedList) Len() int {
-	return ll.count
 }
