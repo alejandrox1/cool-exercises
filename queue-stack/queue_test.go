@@ -21,7 +21,7 @@ func TestQueue(t *testing.T) {
 	}
 
 	for _, c := range cases {
-		s := &Queue{}
+		s := &QueueInt{}
 
 		for _, val := range c.vals {
 			s.Add(val)

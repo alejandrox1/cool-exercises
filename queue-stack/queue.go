@@ -4,6 +4,7 @@ import (
 	"errors"
 )
 
+// Queueable represents a queue interface.
 type Queueable interface {
 	Add(int)
 	Remove() (int, error)
@@ -11,7 +12,8 @@ type Queueable interface {
 	IsEmpty() bool
 }
 
-type Queue struct {
+// QueueInt is queue of queueNodes.
+type QueueInt struct {
 	head *queueNode
 	tail *queueNode
 }
@@ -23,7 +25,7 @@ type queueNode struct {
 }
 
 // Add adds a value to the queue.
-func (s *Queue) Add(value int) {
+func (s *QueueInt) Add(value int) {
 	newNode := &queueNode{value: value}
 
 	// If there is a valid tail, then connect the node to it.
@@ -40,7 +42,7 @@ func (s *Queue) Add(value int) {
 }
 
 // Remove pops an element from the front of the queue.
-func (s *Queue) Remove() (int, error) {
+func (s *QueueInt) Remove() (int, error) {
 	if s.head == nil {
 		return -1, errors.New("Cannot pop. Queue is empty")
 	}
@@ -55,7 +57,7 @@ func (s *Queue) Remove() (int, error) {
 }
 
 // Peek returns the first element in the queue.
-func (s *Queue) Peek() (int, error) {
+func (s *QueueInt) Peek() (int, error) {
 	if s.head == nil {
 		return -1, errors.New("Cannot peek. Queue is empty")
 	}
@@ -64,6 +66,6 @@ func (s *Queue) Peek() (int, error) {
 }
 
 // IsEmpty returns true if queue is empty, else it returns false.
-func (s *Queue) IsEmpty() bool {
+func (s *QueueInt) IsEmpty() bool {
 	return s.head == nil
 }

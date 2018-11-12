@@ -4,6 +4,7 @@ import (
 	"errors"
 )
 
+// Stackable is a stack interface.
 type Stackable interface {
 	Push(int)
 	Pop() (int, error)
@@ -11,6 +12,7 @@ type Stackable interface {
 	IsEmpty() bool
 }
 
+// Stack is a stack of stackNodes.
 type Stack struct {
 	top *stackNode
 }
